@@ -1,6 +1,7 @@
 import sbt.Keys._
 import sbt._
 import Resolvers._
+import scoverage.ScoverageKeys._
 
 object Settings {
   (for {
@@ -14,6 +15,8 @@ object Settings {
       password
     )
   ) getOrElse credentials
+
+
 
   val organizationName = "slick.migration"
   val productName      = "slick-migration"
@@ -35,13 +38,17 @@ object Settings {
     organization            := Settings.organizationName,
     publishMavenStyle       := true,
     publishArtifact in Test := false,
+    coverageMinimum         := 70,
+    coverageFailOnMinimum   := false,
     pomIncludeRepository    := { _ => false },
-
-    resolvers +=
-      Resolvers.MavenRepository   ::
-      SonatypeReleasesRepository  ::
-      SonatypeSnapshotsRepository ::
-      Nil,
+    coverageHighlighting    := {
+      if(scalaBinaryVersion.value == "2.11") true
+      else false
+    },
+    resolvers ++= Seq(
+      Resolvers.MavenRepository,
+      SonatypeReleasesRepository,
+      SonatypeSnapshotsRepository),
 
     publishTo := {
       if (isSnapshot.value)
