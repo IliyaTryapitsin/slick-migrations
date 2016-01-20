@@ -4,30 +4,12 @@ import Resolvers._
 import scoverage.ScoverageKeys._
 
 object Settings {
-  (for {
-    username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-    password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-  } yield
-    credentials += Credentials(
-      SonatypeSnapshotsRepository.name,
-      "oss.sonatype.org",
-      username,
-      password
-    )
-  ) getOrElse credentials
 
-
-
-  val organizationName = "slick.migration"
+  val organizationName = "com.github.itryapitsin"
   val productName      = "slick-migration"
   val currentVersion   = "2.1.0-SNAPSHOT"
   val locales          = "-Duser.language=en" :: "-Duser.region=us" :: Nil
   val scalaVersions    = Version.scala        :: "2.11.5"           :: Nil
-  val noPublishing = seq(
-    publish := (),
-    publishLocal := (),
-    publishTo := None
-  )
 
   val basicSettings = seq(
     version                 := currentVersion,

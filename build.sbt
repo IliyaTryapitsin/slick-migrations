@@ -1,13 +1,30 @@
 
 import Settings._
 
+lazy val root = (project in file("."))
+  .settings(getSettings(name := productName): _*)
+  .settings(publishArtifact := false)
+  .settings(publish := { })
+  .aggregate(
+    `slick-migration-core`,
+    `slick-migration-test-utils`,
+    `slick-migration-derby-driver`,
+    `slick-migration-h2-driver`,
+    `slick-migration-hsql-driver`,
+    `slick-migration-mysql-driver`,
+    `slick-migration-postgres-driver`,
+    `slick-migration-sqlite-driver`
+  )
+
 // === PROJECT DEFINITION
 lazy val `slick-migration-core` = (project in file("core"))
-  .settings(getSettings { name := productName } : _*)
+  .settings(getSettings { name := s"$productName-core" } : _*)
 // .settings(scalariformSettings: _*)
 
 lazy val `slick-migration-test-utils` = (project in file("test-utils"))
   .settings(getSettings { name := s"$productName-test-utils" } : _*)
+  .settings(publishArtifact := false)
+  .settings(publish := { })
 
 // === Drivers
 lazy val `slick-migration-derby-driver` = (project in file("drivers/derby"))

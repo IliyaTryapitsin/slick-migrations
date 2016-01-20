@@ -1,22 +1,29 @@
 language: scala
 scala:
-   - 2.10.5
-   - 2.11.7
-
+- 2.10.5
+- 2.11.7
 cache:
   directories:
-    - $HOME/.m2/repository
-    - $HOME/.sbt
-    - $HOME/.ivy2
-
+  - $HOME/.m2/repository
+  - $HOME/.sbt
+  - $HOME/.ivy2
 jdk:
-  - oraclejdk8
-  - oraclejdk7
-  - openjdk6
-
+- oraclejdk8
+- oraclejdk7
+- openjdk6
 branches:
   only:
-    - master
-
-script:
-  sbt ++$TRAVIS_SCALA_VERSION compile
+  - master
+services:
+- mysql
+before_script:
+- mysql -e "create database IF NOT EXISTS myapp_test;" -uroot
+after_script:
+- mysql -e "drop database myapp_test;" -uroot
+- sbt coveralls
+- sbt +publish
+script: sbt ++$TRAVIS_SCALA_VERSION compile
+env:
+  global:
+  - secure: C+QhdhuE+NmMlzgooXs0s+lvAL9+kmRbsBRUeDBCcwdYTQAEhPOr3t9AMZWc/NgwRg/RJMQBCwwi4gVHvGcbfgLI61+XiFafWAyqGDlBgWGQjqju5h4FwJIFrbMM5GZQfj2dMe5VR7fJJIJWXj2p0rZYab+37VUlLKbVdWiBDPO8rFLGJSX96JSlU0eGGiCMlxEGO/0IsTzsXoOeK1YWBI0jC2etwuFRuzMhXn+IDSK/5KvRpdLO4Fv/axhkyJDS4b6XYU0bcgmBRcaXlX4uxzcym4Iybn3XXnF65MnFVhhT5/Q1l9EHDB8dQ6h9Q/OHG5kj6fKrQuc7mMPmeeYUDaCTMsowPCFqlgJH/wDHhY53OPYLNzIhL6LTLVBbGJXAUaOS+aICfnW4Od7xLWI7hspIc9iBZp6f4/IGHgtonQXvWa82uF6X35vNlC4ESL2ADINbb4erCeKWxByZylcjuZqOHpfGnGTUEh31g+hKdG4VPLvVv9j+XoB3hiHjU4CTlriW9PUpEP1sQNbhrgBGlM5TVjMJQAymLIB4eEAaXIfyuGUEVERSZHFSgVzHTYhg1r6Z/ATlYf0KRiaRBTF5mBZsyh1x6OS06wXiKESrX9VggpA7JZo/CPO5L/MXhJ9cJFEL3ev4i0+PAcXpps7RvqpKsGXkooxAivFHMkINVdk=
+  - secure: Y1eZHhAFHXNuhsKaoejwDEUUOARCkAUbGstHFlTDNklr0grYDGyysLZZREhBAVCk1iNiRQ5LbDJXUhIBTptKfrSObfmqScCFku1RcQs8DSCd1kNttzflYzHYB4IvpRPLowMEpAqSh9+4rkCFuXNoZGKjqmwMhk0Jv83fuq9aImWm0zy40K/SdHr7Y+dc+H1R4pi89hy+T/W5dntl1z9Xj+B2vx2PnKKHDbTRc5sCdVI3tEJrCnHkAYd7nlANvSZHapw5YMnGQJrfqyu78TwjlscHV4k9oVsUVyXwDT2VnYLvxJKVvWTGH/P5eyYWVdth/oNg40Xgi284hEXBhXuPaLk0ong59L3COlhaL86VPUxeHjeMLbEDKu9L9KprPW92ulUjXP6F0l/O3NlkrrCsEhRc5rmlouPhogQJbzLXnvcjFS5pBIvqRHwQe9uYVo9OKDe2/pYWVvc+rWvKrCS8vSHRbBa+z+c5UGcGjl44Yj0z1lAR10POr2KjiiKRWPGPyq9+7LW/jHBvdaLsa+RQZt8qCzqlvRnRudPnPRGxyy7oRcp3Y09ZDm0+XxVa9UpQfDk2xBTkZwHFnn/xSJ2xmnLUUTlfiWUnJCyhoWJJQi2L1teUV5gdlnHpq7O3KfyBiGOjHc1WWrPEShvdpybnwecA7T/+a707BRXnJyf4MTQ=
