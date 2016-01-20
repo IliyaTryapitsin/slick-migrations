@@ -14,7 +14,7 @@ object Version {
 
 object Libraries {
   val slick          = "com.typesafe.slick"         %%  "slick"           % Version.slick
-  val slickDrivers   = "com.arcusys.slick"          %%  "slick-drivers"   % Version.slickDrivers
+//  val slickDrivers   = "com.arcusys.slick"          %%  "slick-drivers"   % Version.slickDrivers
   val scalatest      = "org.scalatest"              %%  "scalatest"       % Version.scalatest
   val logback        = "ch.qos.logback"             %   "logback-classic" % Version.logback
   val config         = "com.typesafe"               %   "config"          % Version.config
@@ -27,13 +27,12 @@ object Dependencies {
 
   val common = Seq(
     Libraries.slick,
-    Libraries.slickDrivers,
+//    Libraries.slickDrivers,
     Libraries.logback,
-    Libraries.oracle % Test,
-    Libraries.sqlserver % Test,
-    Libraries.db2 % Test,
+//    Libraries.oracle % Test,
+//    Libraries.sqlserver % Test,
+//    Libraries.db2 % Test,
     Libraries.scalatest % Test,
     Libraries.config % Test
   )
-
 }
