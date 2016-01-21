@@ -23,6 +23,14 @@ object Settings {
     coverageMinimum         := 70,
     coverageFailOnMinimum   := false,
     pomIncludeRepository    := { _ => false },
+    credentials             ++= {
+      (for {
+        username <- Option(sys.env("SONATYPE_USERNAME"))
+        password <- Option(sys.env("SONATYPE_PASSWORD"))
+      } yield {
+        Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)
+      }).toSeq
+    },
     coverageHighlighting    := {
       if(scalaBinaryVersion.value == "2.11") true
       else false
