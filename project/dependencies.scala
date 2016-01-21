@@ -13,7 +13,10 @@ object Version {
   val h2           = "1.3.170"
   val hsql         = "0.0.15"
   val mysql        = "5.1.34"
-  val postgres     = "9.4-1201-jdbc41"
+  val postgres     = System.getProperty("java.version") match {
+    case version if version startsWith "1.6" => "9.1-901-1.jdbc4"
+    case _ => "9.4-1201-jdbc41"
+  }
 
 }
 
