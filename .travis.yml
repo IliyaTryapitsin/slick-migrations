@@ -20,9 +20,7 @@ before_script:
 - mysql -e "create database IF NOT EXISTS myapp_test;" -uroot
 after_script:
 - mysql -e "drop database myapp_test;" -uroot
-- sbt coveralls
-- sbt +publish
-script: sbt ++$TRAVIS_SCALA_VERSION clean compile coveralls test publish
+script: sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageAggregate +publish
 env:
   global:
   - secure: i/BvVZrhW7k0Q7JtQqlSEMnw6HXTZei5TCNTearwq0W4b4S3S6bQnJSjgzuPsj0aTieU+MBlglINae2pJuEYHlypw7twt6ua+4yhavDmxiMKio11dJAGOYHTNW+thj+VNo3qf0YORWBU+Mu2xZeI+RiUT77TPjc//PzE0dCuW4VzhFZrXsO0egKn08ZJiM6fAZDI91ThgfdP7NIJgxVR7DzNU8Eb/2jGGC2ZLD7NtMRqCFuL53IdC2rf1eTuELEWhYQzEmpydReKJeU0swCx7jT3YndqSsWYZVo8NmprGzwfbB7kbkT67UVI6zvbF0HTXHg1ByJyuBMARAPWR1zzLkCJPkakrknUqtnF8Z0kqRQrpg1fFfOIKrYGcVvHXiKcAp29Vzw12lsmjqrJawjWOwxPplXMlZvNgdtDYOxEFqe6kDxMT3rhOuP+J7WR+KwSYPaTn70NM8Ng1kTvzeILx0+p6kkrAuX09myWBpBbpZ8mT92DWA5i10zvB1psOJaLLgwxq1aTGmaxpnuAFwXAN40lk0bAxlT57C1L2ZS6/ZU42+WHm5cXTB9BWQhItK7PcALIdLRSISk1PvyDYKeK4N8TCVRxBnCxlTVZhBV3pAbdl4PoyFEtlphfKPDc9HXgLnuTS31hzrawwPl/m1vPiu+enLEOIw882BDxaZj2Lng=

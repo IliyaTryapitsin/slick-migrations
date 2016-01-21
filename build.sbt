@@ -1,8 +1,6 @@
 
 import Settings._
 
-val t = println(System.getenv("SONATYPE_USERNAME"))
-
 lazy val root = (project in file("."))
   .settings(getSettings(name := productName): _*)
   .settings(publishArtifact := false)

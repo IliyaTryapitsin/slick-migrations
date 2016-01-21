@@ -20,8 +20,11 @@ object Settings {
     organization            := Settings.organizationName,
     publishMavenStyle       := true,
     publishArtifact in Test := false,
-    coverageMinimum         := 70,
     coverageFailOnMinimum   := false,
+    coverageEnabled         := true,
+    coverageMinimum         := 70,
+    publishArtifact in Test := false,
+    parallelExecution in Test := false,
     pomIncludeRepository    := { _ => false },
     credentials             ++= {
       (for {
