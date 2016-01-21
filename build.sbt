@@ -41,6 +41,7 @@ lazy val `slick-migration-hsql-driver` = (project in file("drivers/hsql"))
 
 lazy val `slick-migration-mysql-driver` = (project in file("drivers/mysql"))
   .settings(getSettings { name := s"$productName-mysql" } : _*)
+  .settings(libraryDependencies += Libraries.mysql)
   .dependsOn(`slick-migration-core`)
 
 lazy val `slick-migration-postgres-driver` = (project in file("drivers/postgres"))

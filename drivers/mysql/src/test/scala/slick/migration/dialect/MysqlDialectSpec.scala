@@ -1,7 +1,7 @@
 package slick.migration.dialect
 
 import org.scalatest.Matchers._
-import org.scalatest.{BeforeAndAfterAll, FlatSpec}
+import org.scalatest.{Ignore, BeforeAndAfterAll, FlatSpec}
 import slick.migration.table.TableMigration
 
 import scala.slick.driver.MySQLDriver

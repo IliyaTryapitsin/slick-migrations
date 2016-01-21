@@ -10,17 +10,28 @@ object Version {
   val oracle       = "11.2.0.4.0"
   val sqlserver    = "4.1.5605.100"
   val db2          = "10.5fp5"
+  val h2           = "1.3.170"
+  val hsql         = "0.0.15"
+  val mysql        = "5.1.34"
+  val postgres     = "9.4-1201-jdbc41"
+
 }
 
 object Libraries {
-  val slick          = "com.typesafe.slick"         %%  "slick"           % Version.slick
-//  val slickDrivers   = "com.arcusys.slick"          %%  "slick-drivers"   % Version.slickDrivers
-  val scalatest      = "org.scalatest"              %%  "scalatest"       % Version.scalatest
-  val logback        = "ch.qos.logback"             %   "logback-classic" % Version.logback
-  val config         = "com.typesafe"               %   "config"          % Version.config
-  val oracle         = "com.oracle"                 %   "ojdbc6"          % Version.oracle
-  val sqlserver      = "com.microsoft.sqlserver"    %   "sqljdbc4"        % Version.sqlserver
-  val db2            = "com.ibm.db2"                %   "db2jcc4"         % Version.db2
+  //  val slickDrivers   = "com.arcusys.slick"          %%  "slick-drivers"              % Version.slickDrivers
+  //  val oracle         = "com.oracle"                 %   "ojdbc6"                     % Version.oracle
+  //  val sqlserver      = "com.microsoft.sqlserver"    %   "sqljdbc4"                   % Version.sqlserver
+  //  val db2            = "com.ibm.db2"                %   "db2jcc4"                    % Version.db2
+  // Db
+  val scalatest      = "org.scalatest"              %%  "scalatest"                  % Version.scalatest
+  val logback        = "ch.qos.logback"             %   "logback-classic"            % Version.logback
+  val config         = "com.typesafe"               %   "config"                     % Version.config
+  val h2             = "com.h2database"             %   "h2"                         % Version.h2
+  val slick          = "com.typesafe.slick"         %%  "slick"                      % Version.slick
+  val hsql           = "com.danidemi.jlubricant"    %   "jlubricant-embeddable-hsql" % Version.hsql
+  val mysql          = "mysql"                      %   "mysql-connector-java"       % Version.mysql
+  val postgres       = "org.postgresql"             %   "postgresql"                 % Version.postgres
+
 }
 
 object Dependencies {
