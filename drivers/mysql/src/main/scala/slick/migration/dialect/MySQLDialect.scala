@@ -8,7 +8,7 @@ import scala.slick.driver.MySQLDriver
 /**
  * Created by Iliya Tryapitsin on 20/01/15.
  */
-class MySQLDialect(driver: MySQLDriver) extends Dialect[MySQLDriver](driver) with SimulatedRenameIndex {
+class MySQLDialect(driver: MySQLDriver = MySQLDriver) extends Dialect[MySQLDriver](driver) with SimulatedRenameIndex {
   override def autoInc(ci: ColumnInfo) = if (ci.autoInc) " AUTO_INCREMENT" else ""
 
   override def quoteIdentifier(id: String): String = {

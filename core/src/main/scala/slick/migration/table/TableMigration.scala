@@ -1,9 +1,9 @@
 package slick.migration.table
 
 import slick.migration._
+import slick.migration.dialect.Dialect
 import slick.migration.{SqlMigration, Migration}
 import slick.migration.ast.{ AstHelpers, ColumnInfo, TableInfo }
-import slick.migration.dialect.Dialect
 
 import scala.slick.driver.JdbcProfile
 import scala.slick.lifted._

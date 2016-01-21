@@ -12,18 +12,21 @@ import scala.slick.jdbc.{StaticQuery => Q}
 
 class DbInit(confName: String, val driver: SlickDriver) {
   private lazy val database = driver.backend.Database
-  private lazy val config   = TestConfig.testConfig(confName)
+  private lazy val config = TestConfig.testConfig(confName)
 
-  private val jdbcDriver = confString("driver")
-  private val create     = confStrings("create")
-  private val postCreate = confStrings("postCreate")
-  private val drop       = confStrings("drop")
+  private lazy val jdbcDriver = confString("driver")
+  private lazy val create = confStrings("create")
+  private lazy val postCreate = confStrings("postCreate")
+  private lazy val drop = confStrings("drop")
 
   override def toString = confString("testConn.url")
 
   def confOptionalString(path: String) = if (config.hasPath(path)) Some(config.getString(path)) else None
+
   def confString(path: String) = confOptionalString(path).getOrElse(null)
+
   def confStrings(path: String) = TestConfig.getStrings(config, path).getOrElse(Nil)
+
   def databaseFor(path: String): driver.Backend#Database = database.forConfig(path, config, loadCustomDriver().getOrElse(null))
 
   def conn = databaseFor("testConn")
@@ -34,11 +37,8 @@ class DbInit(confName: String, val driver: SlickDriver) {
       for (s <- drop) (Q.u + s).execute
       for (s <- create) (Q.u + s).execute
     }
-    if (postCreate.nonEmpty) {
-      conn withSession { implicit session =>
-        for (s <- postCreate) (Q.u + s).execute
-      }
-    }
+
+    for (s <- postCreate) (Q.u + s).execute
   }
 
   def cleanUpAfter() = databaseFor("adminConn") withSession { implicit session =>
@@ -93,7 +93,7 @@ class DbInit(confName: String, val driver: SlickDriver) {
 
   def quoteIdentifier(id: String): String = {
     val s = new StringBuilder(id.length + 4) append '"'
-    for(c <- id) if(c == '"') s append "\"\"" else s append c
+    for (c <- id) if (c == '"') s append "\"\"" else s append c
     (s append '"').toString
   }
 

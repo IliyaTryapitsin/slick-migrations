@@ -20,38 +20,60 @@ lazy val root = (project in file("."))
 // === PROJECT DEFINITION
 lazy val `slick-migration-core` = (project in file("core"))
   .settings(getSettings { name := s"$productName-core" } : _*)
-// .settings(scalariformSettings: _*)
 
 lazy val `slick-migration-test-utils` = (project in file("test-utils"))
   .settings(getSettings { name := s"$productName-test-utils" } : _*)
   .settings(publishArtifact := false)
   .settings(publish := { })
+  .settings(libraryDependencies ++= Libraries.scalatest :: Libraries.config :: Nil)
+  .dependsOn(`slick-migration-core`)
 
 // === Drivers
 lazy val `slick-migration-derby-driver` = (project in file("drivers/derby"))
   .settings(getSettings { name := s"$productName-derby" } : _*)
-  .dependsOn(`slick-migration-core`)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 lazy val `slick-migration-h2-driver` = (project in file("drivers/h2"))
   .settings(getSettings { name := s"$productName-h2" } : _*)
-  .dependsOn(`slick-migration-core`)
+  .settings(libraryDependencies += Libraries.h2)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 lazy val `slick-migration-hsql-driver` = (project in file("drivers/hsql"))
   .settings(getSettings { name := s"$productName-hsql" } : _*)
-  .dependsOn(`slick-migration-core`)
+  .settings(libraryDependencies += Libraries.hsql)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 lazy val `slick-migration-mysql-driver` = (project in file("drivers/mysql"))
   .settings(getSettings { name := s"$productName-mysql" } : _*)
   .settings(libraryDependencies += Libraries.mysql)
-  .dependsOn(`slick-migration-core`)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 lazy val `slick-migration-postgres-driver` = (project in file("drivers/postgres"))
   .settings(getSettings { name := s"$productName-postgres" } : _*)
-  .dependsOn(`slick-migration-core`)
+  .settings(libraryDependencies += Libraries.postgres)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 lazy val `slick-migration-sqlite-driver` = (project in file("drivers/sqlite"))
   .settings(getSettings { name := s"$productName-sqlite" } : _*)
-  .dependsOn(`slick-migration-core`)
+  .dependsOn(
+    `slick-migration-core`,
+    `slick-migration-test-utils`
+  )
 
 //lazy val `slick-migration-oracle-driver` = (project in file("drivers/oracle"))
 //  .settings(getSettings { name := s"$productName-oracle" } : _*)

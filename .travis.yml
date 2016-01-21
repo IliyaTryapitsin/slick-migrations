@@ -17,13 +17,9 @@ branches:
 services:
 - mysql
 
-before_script:
-- mysql -e "create database IF NOT EXISTS myapp_test;" -uroot
 script: sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport coverageAggregate +publish
 after_success:
   - sbt coveralls
-after_script:
-- mysql -e "drop database myapp_test;" -uroot
 
 env:
   global:

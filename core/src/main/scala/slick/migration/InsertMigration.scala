@@ -1,5 +1,6 @@
 package slick.migration
 
+
 import slick.migration.dialect.Dialect
 
 import scala.slick.driver.JdbcProfile
