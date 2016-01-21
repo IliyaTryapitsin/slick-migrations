@@ -15,7 +15,7 @@ object Version {
   val mysql        = "5.1.34"
   val postgres     = System.getProperty("java.version") match {
     case version if version startsWith "1.6" => "9.1-901-1.jdbc4"
-    case _ => "9.4-1201-jdbc41"
+    case _                                   => "9.4-1201-jdbc41"
   }
 
 }
@@ -33,7 +33,10 @@ object Libraries {
   val slick          = "com.typesafe.slick"         %%  "slick"                      % Version.slick
   val hsql           = "com.danidemi.jlubricant"    %   "jlubricant-embeddable-hsql" % Version.hsql
   val mysql          = "mysql"                      %   "mysql-connector-java"       % Version.mysql
-  val postgres       = "org.postgresql"             %   "postgresql"                 % Version.postgres
+  val postgres       = System.getProperty("java.version") match {
+    case version if version startsWith "1.6" => "postgresql"     % "postgresql" % Version.postgres
+    case _                                   => "org.postgresql" % "postgresql" % Version.postgres
+  }
 
 }
 
