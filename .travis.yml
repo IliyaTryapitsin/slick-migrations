@@ -16,10 +16,19 @@ branches:
   - master
 services:
 - mysql
+- postgresql
+addons:
+  postgresql: "9.3"
+
+before_script:
+  - psql -c 'create database myapp_test;' -U postgres
 
 script: sbt ++$TRAVIS_SCALA_VERSION clean coverage test coverageReport coverageAggregate +publish
 after_success:
   - sbt coveralls
+
+after_script:
+  - psql -c 'drop database myapp_test;' -U postgres
 
 env:
   global:

@@ -7,7 +7,7 @@ import scala.slick.driver.PostgresDriver
 /**
  * Created by Iliya Tryapitsin on 20/01/15.
  */
-class PostgresDialect(driver: PostgresDriver) extends Dialect[PostgresDriver](driver) {
+class PostgresDialect(driver: PostgresDriver = PostgresDriver) extends Dialect[PostgresDriver](driver) {
   override def columnType(ci: ColumnInfo): String =
     if (ci.autoInc) "SERIAL" else ci.sqlType.get
 
