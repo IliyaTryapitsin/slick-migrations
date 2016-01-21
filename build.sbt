@@ -5,6 +5,7 @@ lazy val root = (project in file("."))
   .settings(getSettings(name := productName): _*)
   .settings(publishArtifact := false)
   .settings(publish := { })
+  .settings(coverageOutputCobertura := true)
   .aggregate(
     `slick-migration-core`,
     `slick-migration-test-utils`,
