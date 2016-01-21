@@ -2,6 +2,7 @@ import sbt.Keys._
 import sbt._
 import Resolvers._
 import scoverage.ScoverageKeys._
+import org.scoverage.coveralls.Imports.CoverallsKeys._
 
 object Settings {
 
@@ -25,6 +26,7 @@ object Settings {
     coverageMinimum         := 70,
     publishArtifact in Test := false,
     parallelExecution in Test := false,
+    coverallsToken          := Option(sys.env("COVERALL_TOKEN")),
     pomIncludeRepository    := { _ => false },
     credentials             ++= {
       (for {
